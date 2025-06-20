@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQ-2000PT HbA1c Analyzer | Professional Medical Device Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #9b59b6 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .device-showcase {
+            position: relative;
+        }
+
+        .main-device-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid #dee2e6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-device-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 3s infinite;
+        }
+
+        .device-icon {
+            font-size: 4rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        .device-info {
+            text-align: left;
+        }
+
+        .device-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .device-subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .certification-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .badge.certification {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .badge.technology {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tech-card:hover::before {
+            opacity: 1;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .tech-card h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .tech-icon {
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+
+        .component-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .component-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .component-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left-color: #e74c3c;
+        }
+
+        .component-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .component-icon {
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        .component-description {
+            color: #5d6d7e;
+            line-height: 1.7;
+        }
+
+        .specifications-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .specifications-table th {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .specifications-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .specifications-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(145deg, #ffffff, #f1f2f6);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .device-title {
+                font-size: 2.5rem;
+            }
+            
+            .technical-grid,
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bg">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="device-showcase">
+                    <div class="main-device-image">
+                        <div class="device-image">
+                            <img src="9633.jpg" alt="MQ-2000PT HPLC HbA1c Analyzer" style="max-width: 180px; width: 100%; display: block; margin: 0 auto;">
+                            <div style="font-size: 1rem; margin-top: 10px; color: #6c757d;">
+                                MQ-2000PT<br>
+                                <small>HPLC HbA1c Analyzer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="device-info">
+                    <h1 class="device-title">MQ-2000PT</h1>
+                    <p class="device-subtitle">Professional HPLC HbA1c Analyzer System</p>
+                    
+                    <div class="certification-badges">
+                        <span class="badge certification">NGSP Certified</span>
+                        <span class="badge certification">IFCC Certified</span>
+                        <span class="badge technology">HPLC Technology</span>
+                        <span class="badge">CE Marked</span>
+                        <span class="badge">Clinical Grade</span>
+                    </div>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value">120s</div>
+                            <div class="metric-label">Test Time</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">&lt;2%</div>
+                            <div class="metric-label">CV Precision</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">3000+</div>
+                            <div class="metric-label">Global Installs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Technical Specifications Grid -->
+        <section class="technical-grid">
+            <div class="tech-card">
+                <h3><span class="tech-icon">⚡</span>Performance Specifications</h3>
+                <table class="specifications-table">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Specification</th>
+                    </tr>
+                    <tr>
+                        <td>Test Speed</td>
+                        <td>120 seconds per sample</td>
+                    </tr>
+                    <tr>
+                        <td>Precision (CV)</td>
+                        <td>&lt; 2%</td>
+                    </tr>
+                    <tr>
+                        <td>Sample Volume</td>
+                        <td>Minimal requirement</td>
+                    </tr>
+                    <tr>
+                        <td>Measurement Range</td>
+                        <td>4.0% - 18.0% HbA1c</td>
+                    </tr>
+                    <tr>
+                        <td>Throughput</td>
+                        <td>Up to 30 samples/hour</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tech-card">
+                <h3><span class="tech-icon">🧪</span>Analytical Technology</h3>
+                <table class="specifications-table">
+                    <tr>
+                        <th>Technology</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Method</td>
+                        <td>High Performance Liquid Chromatography (HPLC)</td>
+                    </tr>
+                    <tr>
+                        <td>Separation</td>
+                        <td>Cation exchange column</td>
+                    </tr>
+                    <tr>
+                        <td>Detection</td>
+                        <td>Dual wavelength photometry</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature Control</td>
+                        <td>Precision column temperature regulation</td>
+                    </tr>
+                    <tr>
+                        <td>Variant Analysis</td>
+                        <td>Hemoglobin variant separation capability</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Device Components Section -->
+        <section class="component-section">
+            <h2 class="section-title">Device Components & Features</h2>
+            <div class="components-grid">
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">📱</span>
+                        Touchscreen Interface
+                    </h4>
+                    <p class="component-description">
+                        Intuitive color touchscreen display for easy operation and navigation. Features user-friendly interface with one-key operation capability, automatic scanning barcode integration, and real-time result display with comprehensive data management.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🔧</span>
+                        Sample Processing System
+                    </h4>
+                    <p class="component-description">
+                        Advanced sample processing with automatic cap piercing technology, automatic mixing system, and barcode scanning. Sample requires no pre-processing, supporting both whole blood and diluted blood detection with automated sample rotation and blending.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🌡️</span>
+                        Column Temperature Control
+                    </h4>
+                    <p class="component-description">
+                        Precision temperature control system maintains optimal column performance. Real-time monitoring of column temperature ensures consistent separation conditions and reliable results throughout operation.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">💧</span>
+                        Reagent Management System
+                    </h4>
+                    <p class="component-description">
+                        Intelligent reagent monitoring with real-time reagent allowance tracking. Automated reagent management prevents interruptions and ensures continuous operation with optimal reagent utilization.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">📊</span>
+                        HPLC Separation Column
+                    </h4>
+                    <p class="component-description">
+                        High-performance cation exchange column specifically designed for HbA1c separation. Core components adopt high precision accessories to ensure the stability of results with excellent variant separation capabilities.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🔍</span>
+                        Detection System
+                    </h4>
+                    <p class="component-description">
+                        Dual wavelength photometric detection system with high sensitivity and specificity. Real-time monitoring of pipeline pressure ensures optimal detection conditions and measurement accuracy.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🔒</span>
+                        Quality Control System
+                    </h4>
+                    <p class="component-description">
+                        HPLC Method, Continue to get NSGP/IFCC certificate for several years. Integrated quality control monitoring with automated calibration procedures and comprehensive data integrity features.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🛠️</span>
+                        Maintenance System
+                    </h4>
+                    <p class="component-description">
+                        Easy Maintenance design with automated cleaning cycles, self-diagnostic capabilities, and user-friendly maintenance protocols to ensure optimal performance and minimal downtime.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Section -->
+        <section class="component-section">
+            <h2 class="section-title">Clinical Advantages</h2>
+            <div class="components-grid">
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">✅</span>
+                        Regulatory Compliance
+                    </h4>
+                    <p class="component-description">
+                        HPLC Method, Continue to get NSGP/IFCC certificate for several years, ensuring international standardization and regulatory compliance for clinical diagnostic use.
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">🎯</span>
+                        Operational Stability
+                    </h4>
+                    <p class="component-description">
+                        Stable - The core components adopt high precision accessories. Real-time monitoring of pipeline pressure, column temperature and reagent allowance. To ensure the stability of the results
+                    </p>
+                </div>
+
+                <div class="component-card">
+                    <h4 class="component-title">
+                        <span class="component-icon">⚡</span>
+                        User Convenience
+                    </h4>
+                    <p class="component-description">
+                        Convenient - Sample without pre-process, Automatic mixing and scanning barcode, Easy and Fast operation, Easy Maintenance
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2>Medconn Diagnostics</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Leading Provider of In Vitro Diagnostic Solutions</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>Founded</h4>
+                    <p>1992 - Over 30 years of expertise</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Headquarters</h4>
+                    <p>Hangzhou, China</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Focus Areas</h4>
+                    <p>HbA1c, Clinical Chemistry, Immunoassay, POCT</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Global Reach</h4>
+                    <p>Comprehensive service network worldwide</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.tech-card, .component-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add interactive hover effects
+            const metricCards = document.querySelectorAll('.metric-card');
+            metricCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.08) rotate(2deg)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Parallax effect for floating shapes
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const shapes = document.querySelectorAll('.floating-shape');
+                
+                shapes.forEach((shape, index) => {
+                    const speed = 0.5 + (index * 0.3);
+                    shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
